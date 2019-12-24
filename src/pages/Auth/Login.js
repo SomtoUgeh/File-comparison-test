@@ -18,7 +18,10 @@ const Login = () => {
       <Grid style={{ height: "100vh" }} verticalAlign="middle">
         <Grid.Column style={{ maxWidth: 450, margin: "0 auto" }}>
           <Header as="h2" color="teal" textAlign="center">
-            Log-in to scan document!
+            Welcome to Document-Compare
+            <Header.Subheader style={{ marginTop: 10, marginBottom: 40 }}>
+              Log-in to compare your documents!
+            </Header.Subheader>
           </Header>
 
           <Formik
