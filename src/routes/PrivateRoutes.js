@@ -5,6 +5,7 @@ import { isAuthenticated } from "utils/cookieHelpers";
 import AuthContextProvider from "contexts/AuthContext";
 import ErrorBoundaryFallback from "components/ErrorBoundary";
 import { Route, Redirect, useLocation } from "react-router-dom";
+import Header from "layouts/Header";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const location = useLocation();
@@ -16,7 +17,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         <AuthContextProvider>
           <ErrorBoundary FallbackComponent={ErrorBoundaryFallback}>
             <Suspense fallback={<p>Loading...</p>}>
-              <Component />
+              <div>
+                <Header />
+                <Component />
+              </div>
             </Suspense>
           </ErrorBoundary>
         </AuthContextProvider>

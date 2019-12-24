@@ -1,0 +1,27 @@
+#root {
+  height: 100%;
+}
+
+.ct-toast {
+  margin-top: 15px !important;
+  box-shadow: 2px 2px 3px #ececec !important;
+  width: auto !important;
+  display: flex !important;
+  padding: 13px 33px !important;
+  max-width: 400px !important;
+  margin-bottom: 10px !important;
+  border-radius: 30px !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  color: white !important;
+  min-height: initial !important;
+  border: 0 !important;
+  opacity: 0;
+}
+
+.ct-toast:hover {
+  cursor: pointer;
+}
+
+.ct-text {
+  font-size: 15px !important;
+}
