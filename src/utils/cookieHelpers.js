@@ -34,6 +34,7 @@ export const getUser = () => {
 
   if (Cookies.get("_uId")) {
     user = Cookies.get("_uId");
+    user = JSON.parse(user);
     return user;
   }
 
