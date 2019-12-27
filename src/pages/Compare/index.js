@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Formik } from "formik";
+import Preview from "./Preview";
 import doAlert from "utils/doAlert";
 import { CompareSchema } from "utils/validationSchema";
 import { Grid, Header, Input, Button, Form, Icon } from "semantic-ui-react";
-import Preview from "./Preview";
 
 const Compare = () => {
   const firstStudentFile = useRef();
@@ -85,7 +85,11 @@ const Compare = () => {
   return (
     <div>
       <Header as="h1">Compare documents</Header>
-      <p>Please enter the names of the students and upload their documents</p>
+      <p>
+        {view === "preview"
+          ? "Preview information"
+          : "Please enter the names of the students and upload their documents"}
+      </p>
 
       {view === "preview" ? (
         <Preview details={details} />
@@ -228,7 +232,7 @@ const Compare = () => {
                       </Grid>
 
                       <Button color="teal" fluid type="submit" style={{ marginTop: "5rem" }}>
-                        Submit
+                        Preview
                       </Button>
                     </Form>
                   )}

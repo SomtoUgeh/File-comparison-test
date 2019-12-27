@@ -41,3 +41,29 @@
 .cancel:hover {
   color: red;
 }
+
+.view-box {
+  margin-bottom: 2rem;
+}
+
+.view-box__title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.view-box__title-heading {
+  color: grey;
+}
+
+.view-box__content {
+  margin-top: 1rem;
+}
+
+.view-box__content-core {
+  border: 1px dashed #8080805e;
+  padding: 15px 25px;
+  margin-top: 1rem;
+  border-radius: 5px;
+  height: 150px;
+  overflow: scroll;
+}
