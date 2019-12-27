@@ -1,11 +1,12 @@
 import React, { Suspense } from "react";
 import PropTypes from "prop-types";
+import Header from "layouts/Header";
+import { Container } from "semantic-ui-react";
 import { ErrorBoundary } from "react-error-boundary";
 import { isAuthenticated } from "utils/cookieHelpers";
 import AuthContextProvider from "contexts/AuthContext";
 import ErrorBoundaryFallback from "components/ErrorBoundary";
 import { Route, Redirect, useLocation } from "react-router-dom";
-import Header from "layouts/Header";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const location = useLocation();
@@ -16,12 +17,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {access === process.env.REACT_APP_SECRET ? (
         <AuthContextProvider>
           <ErrorBoundary FallbackComponent={ErrorBoundaryFallback}>
-            <Suspense fallback={<p>Loading...</p>}>
-              <div>
-                <Header />
-                <Component />
-              </div>
-            </Suspense>
+            <div>
+              <Header />
+              <Container text style={{ marginTop: "7em" }}>
+                <Suspense fallback={<p>Loading...</p>}>
+                  <Component />
+                </Suspense>
+              </Container>
+            </div>
           </ErrorBoundary>
         </AuthContextProvider>
       ) : (

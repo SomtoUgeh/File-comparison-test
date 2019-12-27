@@ -3,8 +3,9 @@ import OpenRoutes from "routes/OpenRoutes";
 import PrivateRoute from "routes/PrivateRoutes";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-const Login = lazy(() => import("pages/Auth/Login"));
 const Home = lazy(() => import("pages/Home"));
+const Compare = lazy(() => import("pages/Compare"));
+const Login = lazy(() => import("pages/Auth/Login"));
 const NotFound = lazy(() => import("pages/NotFound"));
 
 const Routes = () => (
@@ -13,6 +14,7 @@ const Routes = () => (
       <Switch>
         <OpenRoutes exact path="/login" component={Login} />
         <PrivateRoute exact path={["/home", "/"]} component={Home} />
+        <PrivateRoute exact path="/compare" component={Compare} />
         <OpenRoutes component={NotFound} />
       </Switch>
     </Suspense>
