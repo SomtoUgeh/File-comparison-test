@@ -54,6 +54,7 @@ const Compare = () => {
         { ...secondFile, student: secondStudent }
       ];
 
+      // eslint-disable-next-line array-callback-return
       details.map(file => {
         if (file.content.length === 0) {
           file = {

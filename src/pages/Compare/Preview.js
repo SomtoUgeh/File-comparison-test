@@ -1,5 +1,8 @@
-import React from "react";
-import { Button } from "semantic-ui-react";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import stringSimilarity from "string-similarity";
+import { Button, Modal, Header } from "semantic-ui-react";
+import { HistoryContext } from "contexts/HistoryContext";
 
 const ViewBox = ({ info }) => (
   <div className="view-box">
@@ -20,7 +23,72 @@ const ViewBox = ({ info }) => (
   </div>
 );
 
+const Results = ({
+  firstStudent,
+  secondStudent,
+  history,
+  handleCompareStrings,
+  similarityPercentage
+}) => (
+  <div>
+    <Modal
+      trigger={
+        <Button color="teal" fluid style={{ marginTop: "5rem" }} onClick={handleCompareStrings}>
+          Compare
+        </Button>
+      }
+      closeIcon
+    >
+      <Header content="Results!" />
+      <Modal.Content>
+        <div style={{ textAlign: "center", fontSize: 20 }}>
+          The similarity score between{" "}
+          <span className="view-box__title-heading">
+            {firstStudent.student}'s - {firstStudent.name}
+          </span>{" "}
+          and{" "}
+          <span className="view-box__title-heading">
+            {secondStudent.student}'s - {secondStudent.name}
+          </span>{" "}
+          is
+        </div>
+        <div className="big-score">{`${Number(similarityPercentage)}%`}</div>
+      </Modal.Content>
+
+      <Modal.Actions>
+        <Button color="green" onClick={() => history.push("/")}>
+          Save and return home
+        </Button>
+      </Modal.Actions>
+    </Modal>
+  </div>
+);
+
 const Preview = ({ details }) => {
+  const { handleAddHistory } = useContext(HistoryContext);
+  const [similarityPercentage, setSimilarityPercentage] = useState(0);
+
+  const history = useHistory();
+  const [firstStudent, secondStudent] = details;
+
+  const handleCompareStrings = () => {
+    let strings;
+
+    strings = details.map(({ content }) => content);
+    const [firstString, secondString] = strings;
+
+    const similaritiesScore = stringSimilarity.compareTwoStrings(firstString, secondString);
+
+    const stringComparisonComplete = {
+      score: (Number(similaritiesScore) * 100).toFixed(2),
+      details
+    };
+
+    handleAddHistory(stringComparisonComplete);
+
+    setSimilarityPercentage((Number(similaritiesScore) * 100).toFixed(2));
+  };
+
   return (
     <div style={{ marginTop: "4rem" }}>
       {details.map(info => (
@@ -28,9 +96,13 @@ const Preview = ({ details }) => {
       ))}
 
       <div style={{ marginBottom: 30 }}>
-        <Button color="teal" fluid style={{ marginTop: "5rem" }}>
-          Compare
-        </Button>
+        <Results
+          history={history}
+          firstStudent={firstStudent}
+          secondStudent={secondStudent}
+          handleCompareStrings={handleCompareStrings}
+          similarityPercentage={similarityPercentage}
+        />
       </div>
     </div>
   );
