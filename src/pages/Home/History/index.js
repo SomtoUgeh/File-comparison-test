@@ -23,32 +23,26 @@ const History = () => {
           </Table.Header>
 
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>John</Table.Cell>
-              <Table.Cell>Mike</Table.Cell>
-              <Table.Cell>50% Similarity</Table.Cell>
-              <Table.Cell selectable>
-                <a href="#">Compare</a>
-              </Table.Cell>
-            </Table.Row>
+            {comparisonHistory.length > 0 &&
+              comparisonHistory.map(({ details, score }) => (
+                <Table.Row>
+                  {details.map(({ student }) => (
+                    <Table.Cell>{student}</Table.Cell>
+                  ))}
+                  <Table.Cell>{`${Number(score)}%`} Similarity</Table.Cell>
 
-            <Table.Row>
-              <Table.Cell>John</Table.Cell>
-              <Table.Cell>Mike</Table.Cell>
-              <Table.Cell>50% Similarity</Table.Cell>
-              <Table.Cell selectable>
-                <a href="#">Compare</a>
-              </Table.Cell>
-            </Table.Row>
-
-            <Table.Row>
-              <Table.Cell>John</Table.Cell>
-              <Table.Cell>Mike</Table.Cell>
-              <Table.Cell>50% Similarity</Table.Cell>
-              <Table.Cell selectable>
-                <a href="#">Compare</a>
-              </Table.Cell>
-            </Table.Row>
+                  <Table.Cell selectable>
+                    <a
+                      href
+                      onClick={e => {
+                        e.preventDefault();
+                      }}
+                    >
+                      Run again
+                    </a>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
           </Table.Body>
         </Table>
       ) : (
