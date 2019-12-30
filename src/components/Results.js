@@ -15,7 +15,7 @@ const Results = ({
         <Button
           fluid
           color="teal"
-          style={{ marginTop: "5rem" }}
+          style={{ marginTop: "5rem", marginBottom: "8rem" }}
           onClick={() => handleCompareStrings(isAvailable)}
         >
           Compare

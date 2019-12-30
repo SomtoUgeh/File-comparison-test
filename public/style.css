@@ -1,0 +1,18 @@
+.api-button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  background: white;
+  z-index: 3;
+  padding: 15px;
+}
+
+.api-title {
+  margin-right: 10px;
+  font-weight: bold;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+}

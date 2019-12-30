@@ -22,9 +22,21 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+    <link rel="stylesheet" href="style.css" />
     <title>Compare Documents</title>
   </head>
   <body>
+    <div class="api-button">
+      <div class="api-title">
+        API Collection:
+      </div>
+      <div
+        class="postman-run-button"
+        data-postman-action="collection/import"
+        data-postman-var-1="f1427f5187e1b97aa8f8"
+      ></div>
+    </div>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -37,5 +49,20 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script type="text/javascript">
+      (function(p, o, s, t, m, a, n) {
+        !p[s] &&
+          (p[s] = function() {
+            (p[t] || (p[t] = [])).push(arguments);
+          });
+        !o.getElementById(s + t) &&
+          o
+            .getElementsByTagName("head")[0]
+            .appendChild(
+              ((n = o.createElement("script")), (n.id = s + t), (n.async = 1), (n.src = m), n)
+            );
+      })(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js");
+    </script>
   </body>
 </html>
