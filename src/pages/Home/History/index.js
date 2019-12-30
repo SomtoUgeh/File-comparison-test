@@ -1,10 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Table, Header } from "semantic-ui-react";
 import { HistoryContext } from "contexts/HistoryContext";
 
 const History = () => {
-  const { comparisonHistory } = useContext(HistoryContext);
+  const { comparisonHistory, getAllHistory } = useContext(HistoryContext);
+
+  /**
+   * Typically would make an API call to fetch history as the page renders,
+   * However, I am making use of internal state ie context and hooks
+   *
+   * useEffect(async() => await getAllHistory(), [])
+   *
+   */
+
   const history = useHistory();
 
   return (

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import uuid from "uuid/v4";
 import ViewBox from "components/ViewBox";
 import Results from "components/Results";
 import { useHistory } from "react-router-dom";
@@ -25,7 +24,6 @@ const Preview = ({ details, isAvailable }) => {
     const similaritiesScore = stringSimilarity.compareTwoStrings(firstString, secondString);
 
     const stringComparisonComplete = {
-      id: uuid,
       userId,
       score: (Number(similaritiesScore) * 100).toFixed(2),
       details
