@@ -10,7 +10,7 @@ const AuthContextProvider = ({ children }) => {
   const history = useHistory();
 
   const handleSignIn = useCallback(
-    async ({ name, email, password }) => {
+    async ({ id, name, email, password }) => {
       try {
         const accessKey = encodeURI(
           JSON.stringify({
@@ -19,6 +19,7 @@ const AuthContextProvider = ({ children }) => {
         );
 
         const userDetails = {
+          userId: id,
           name,
           email,
           password

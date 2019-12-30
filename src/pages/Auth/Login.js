@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import uuid from "uuid/v4";
 import { Formik } from "formik";
 import { AuthContext } from "contexts/AuthContext";
 import { LoginSchema } from "utils/validationSchema";
@@ -27,7 +28,9 @@ const Login = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
-            onSubmit={({ name, email, password }) => handleSignIn({ name, email, password })}
+            onSubmit={({ name, email, password }) =>
+              handleSignIn({ id: uuid(), name, email, password })
+            }
           >
             {({
               values,

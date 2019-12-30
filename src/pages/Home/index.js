@@ -1,8 +1,8 @@
 import React from "react";
 import HistoryTable from "./History";
 import { useHistory } from "react-router-dom";
-import { Header, Button } from "semantic-ui-react";
 import { getUser } from "utils/cookieHelpers";
+import { Header, Button } from "semantic-ui-react";
 
 const Home = () => {
   const history = useHistory();

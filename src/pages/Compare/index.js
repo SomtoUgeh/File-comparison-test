@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Formik } from "formik";
-import Preview from "./Preview";
 import doAlert from "utils/doAlert";
+import Preview from "components/Preview";
+import { useLocation } from "react-router-dom";
 import { CompareSchema } from "utils/validationSchema";
 import { Grid, Header, Input, Button, Form, Icon } from "semantic-ui-react";
 
@@ -12,10 +13,12 @@ const Compare = () => {
   const [firstFile, setFirstFile] = useState({ name: "", content: "" });
   const [secondFile, setSecondFile] = useState({ name: "", content: "" });
 
-  const [view, setView] = useState("initial");
-  const [details, setDetails] = useState([]);
+  const { state: { incomingView = "", incomingDetails = [] } = {} } = useLocation();
 
-  const handleFileUpload = async (e, type) => {
+  const [view, setView] = useState(incomingView ? incomingView : "initial");
+  const [details, setDetails] = useState(incomingDetails ? incomingDetails : []);
+
+  const handleFileUpload = (e, type) => {
     let results;
     const selectedFile = e.target.files[0];
 
@@ -93,7 +96,7 @@ const Compare = () => {
       </p>
 
       {view === "preview" ? (
-        <Preview details={details} />
+        <Preview details={details} isAvailable={incomingView ? true : false} />
       ) : (
         <Grid.Column style={{ marginTop: "3rem" }}>
           <Grid>

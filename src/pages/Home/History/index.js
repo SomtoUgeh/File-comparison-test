@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Table, Header } from "semantic-ui-react";
 import { HistoryContext } from "contexts/HistoryContext";
 
 const History = () => {
   const { comparisonHistory } = useContext(HistoryContext);
+  const history = useHistory();
 
   return (
     <div>
@@ -30,13 +32,20 @@ const History = () => {
                     <Table.Cell>{student}</Table.Cell>
                   ))}
                   <Table.Cell>{`${Number(score)}%`} Similarity</Table.Cell>
-
                   <Table.Cell selectable>
                     <a
                       href
                       onClick={e => {
                         e.preventDefault();
+                        history.push({
+                          pathname: "/compare",
+                          state: {
+                            incomingView: "preview",
+                            incomingDetails: details
+                          }
+                        });
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Run again
                     </a>
