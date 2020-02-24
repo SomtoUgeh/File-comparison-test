@@ -22,7 +22,7 @@ const HistoryContextProvider = ({ children }) => {
 
   const handleAddHistory = useCallback(async newItem => {
     try {
-      const { success, data: history } = await postApi("history", newItem);
+      const { success } = await postApi("history", newItem);
 
       if (success) {
         /**

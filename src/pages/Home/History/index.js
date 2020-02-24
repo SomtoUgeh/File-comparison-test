@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Table, Header } from "semantic-ui-react";
 import { HistoryContext } from "contexts/HistoryContext";
 
 const History = () => {
-  const { comparisonHistory, getAllHistory } = useContext(HistoryContext);
+  const { comparisonHistory } = useContext(HistoryContext);
 
   /**
    * Typically would make an API call to fetch history as the page renders,
