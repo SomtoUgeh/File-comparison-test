@@ -73,3 +73,43 @@
   padding: 20px;
   text-align: center;
 }
+
+/* Modal styling start */
+.modal-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: rgba(11, 30, 75, 0.4);
+}
+
+.modal-content {
+  margin: 1rem;
+  padding: 20px;
+  background: #fff;
+  min-width: 500px;
+  min-height: 500px;
+  border-radius: 8px;
+  position: relative;
+  justify-self: center;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.modal-close {
+  right: 0;
+  position: absolute;
+  margin-right: 20px;
+}
+
+.modal-close-icon {
+}
+
+.modal-body {
+}
+
+/* Modal styling end */
