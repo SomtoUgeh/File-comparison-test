@@ -75,6 +75,10 @@
 }
 
 /* Modal styling start */
+.scroll-lock {
+  overflow: hidden;
+}
+
 .modal-container {
   position: absolute;
   top: 0;
