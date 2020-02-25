@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
-import { createPortal } from "react-dom";
-import FocusTrap from "focus-trap-react";
+import React, { useState } from "react";
+import BaseModal from "./BaseModal";
+import { animated, useTransition } from "react-spring";
 
-const ModalTrigger = props => {
+export function ModalTrigger(props) {
   const { buttonRef, showModal, triggerText } = props;
 
   return (
@@ -16,70 +16,29 @@ const ModalTrigger = props => {
       {triggerText}
     </button>
   );
-};
+}
 
-const ModalContainer = props => {
-  const { onClose, modalRef, closeRef, children, onKeyDown } = props;
-
-  return createPortal(
-    <FocusTrap>
-      <div
-        role="dialog"
-        tabIndex="-1"
-        ref={modalRef}
-        aria-modal="true"
-        onClick={onClose}
-        onKeyDown={onKeyDown}
-        className="modal-container"
-      >
-        <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <button
-            type="button"
-            ref={closeRef}
-            onClick={onClose}
-            className="modal-close"
-            aria-label="Close Modal"
-            aria-labelledby="close-modal"
-          >
-            <svg className="modal-close-icon" viewBox="0 0 40 40">
-              <path d="M 10,10 L 30,30 M 30,10 L 10,30" />
-            </svg>
-          </button>
-          <div className="modal-body">{children}</div>
-        </div>
-      </div>
-    </FocusTrap>,
-    document.querySelector("#modal-root")
-  );
-};
-
-const Modal = props => {
+export default function Modal(props) {
+  const [isOpen, setIsOpen] = useState(false);
   const { buttonRef, closeRef, triggerText, content } = props;
 
-  const modalRef = useRef();
-  const [shown, setShown] = useState(false);
+  const modalTransition = useTransition(isOpen, null, {
+    from: {
+      opacity: 0,
+      transform: "translate3d(0, 20%, 0) scale(0.9)"
+    },
+    enter: { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+    leave: {
+      opacity: 0,
+      transform: "translate3d(0, 20%, 0) scale(0.9)"
+    }
+  });
 
-  const toggleScrollLock = () => {
-    document.querySelector("html").classList.toggle("scroll-lock");
-  };
-
-  const showModal = () => {
-    setShown(true);
-    toggleScrollLock();
-  };
-
-  const onClose = () => {
-    setShown(false);
-    toggleScrollLock();
-  };
+  const showModal = () => setIsOpen(true);
+  const onRequestClose = () => setIsOpen(false);
 
   const onKeyDown = event => {
-    if (event.keyCode === 27) onClose();
-  };
-
-  const onClickOutside = event => {
-    if (modalRef.current && modalRef.current.contains(event.target)) return;
-    onClose();
+    if (event.keyCode === 27) onRequestClose();
   };
 
   const modalTriggerProps = {
@@ -89,21 +48,40 @@ const Modal = props => {
   };
 
   const modalContainerProps = {
-    onClose,
-    closeRef,
-    modalRef,
+    isOpen,
     onKeyDown,
-    onClickOutside
+    onRequestClose
   };
 
   return (
     <>
+      <BaseModal {...modalContainerProps}>
+        {modalTransition.map(
+          ({ item, key, props: style }) =>
+            item && (
+              <animated.div
+                key={key}
+                style={style}
+                className="modal-content"
+                onClick={e => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  ref={closeRef}
+                  className="modal-close"
+                  aria-label="Close Modal"
+                  onClick={onRequestClose}
+                  aria-labelledby="close-modal"
+                >
+                  X
+                </button>
+                <div className="modal-body">{content && content()}</div>
+              </animated.div>
+            )
+        )}
+      </BaseModal>
+
       <ModalTrigger {...modalTriggerProps} />
-      {shown ? (
-        <ModalContainer {...modalContainerProps}>{content && content()}</ModalContainer>
-      ) : null}
     </>
   );
-};
-
-export default Modal;
+}
