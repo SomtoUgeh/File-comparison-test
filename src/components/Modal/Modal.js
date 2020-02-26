@@ -25,12 +25,12 @@ export default function Modal(props) {
   const modalTransition = useTransition(isOpen, null, {
     from: {
       opacity: 0,
-      transform: "translate3d(0, 20%, 0) scale(0.9)"
+      transform: "translate3d(0, 20%, 0)"
     },
-    enter: { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+    enter: { opacity: 1, transform: "translate3d(0, 0, 0)" },
     leave: {
       opacity: 0,
-      transform: "translate3d(0, 20%, 0) scale(0.9)"
+      transform: "translate3d(0, 20%, 0)"
     }
   });
 
