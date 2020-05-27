@@ -3,7 +3,6 @@ import { Formik } from "formik";
 import { AuthContext } from "contexts/AuthContext";
 import { LoginSchema } from "utils/validationSchema";
 import { Button, Form as SemanticForm, Grid, Header, Segment } from "semantic-ui-react";
-import Example from "components/Modal/Example";
 
 const Login = () => {
   const { handleSignIn } = useContext(AuthContext);
@@ -107,10 +106,6 @@ const Login = () => {
               </>
             )}
           </Formik>
-
-          <>
-            <Example />
-          </>
         </Grid.Column>
       </Grid>
     </>
